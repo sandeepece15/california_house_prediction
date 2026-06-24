@@ -7,9 +7,14 @@ from io import BytesIO
 
 app = FastAPI(title="California House Price Prediction API")
 
+import os
+import joblib
+
+if not os.path.exists("house_model.joblib"):
+    raise Exception("Model file not found. Run train.py first.")
+
 model = joblib.load("house_model.joblib")
 features = joblib.load("house_features.joblib")
-
 
 class HouseFeature(BaseModel):
     MedInc: float = Field(gt=0, description="Median income of households")
