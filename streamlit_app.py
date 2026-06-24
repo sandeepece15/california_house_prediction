@@ -9,6 +9,12 @@ st.set_page_config(
     layout="centered",
 )
 
+import os
+import joblib
+
+if not os.path.exists("house_model.joblib"):
+    raise Exception("Model file not found. Run train.py first.")
+
 model = joblib.load("house_model.joblib")
 features = joblib.load("house_features.joblib")
 
